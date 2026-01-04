@@ -21,9 +21,64 @@
                 <button class="tab-btn" data-tab="stats">Stats</button>
             </nav>
             <div class="header-actions">
-                <button id="exportBtn" class="btn btn-secondary">Export JSON</button>
-                <label for="importFile" class="btn btn-secondary">Import JSON</label>
-                <input type="file" id="importFile" accept=".json" hidden>
+                <div class="settings-dropdown">
+                    <button id="settingsBtn" class="btn btn-icon settings-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                    </button>
+                    <div class="settings-menu hidden">
+                        <button id="exportBtn" class="settings-menu-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            Export JSON
+                        </button>
+                        <label for="importFile" class="settings-menu-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Import JSON
+                        </label>
+                        <input type="file" id="importFile" accept=".json" hidden>
+                        <div class="settings-menu-divider"></div>
+                        <div class="settings-menu-item theme-toggle-container">
+                            <span>Theme</span>
+                            <label class="theme-toggle">
+                                <input type="checkbox" id="themeToggle">
+                                <span class="theme-toggle-slider">
+                                    <svg class="sun-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                        <circle cx="12" cy="12" r="5"></circle>
+                                        <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                        <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                        <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                        <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                    </svg>
+                                    <svg class="moon-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                    </svg>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="settings-menu-divider"></div>
+                        <button id="iosSetupBtn" class="settings-menu-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                            </svg>
+                            iOS App Setup
+                        </button>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -83,25 +138,25 @@
             <section id="statsTab" class="tab-content">
                 <div class="stats-container">
                     <aside class="stats-sidebar">
-                        <button class="subtab-btn active" data-subtab="perMonth">Per Month</button>
-                        <button class="subtab-btn" data-subtab="perHabit">Per Habit</button>
+                        <button class="subtab-btn active" data-subtab="perHabit">Per Habit</button>
+                        <button class="subtab-btn" data-subtab="perMonth">Per Month</button>
                     </aside>
                     <div class="stats-content">
+                        <!-- Per Habit Stats -->
+                        <div id="perHabitStats" class="subtab-content active">
+                            <div class="stats-header">
+                                <h2>Habit Statistics</h2>
+                            </div>
+                            <div id="habitStats" class="habit-stats-list"></div>
+                        </div>
                         <!-- Per Month Stats -->
-                        <div id="perMonthStats" class="subtab-content active">
+                        <div id="perMonthStats" class="subtab-content">
                             <div class="stats-header">
                                 <button id="statsPrevMonth" class="btn btn-icon">&lt;</button>
                                 <h2 id="statsMonth"></h2>
                                 <button id="statsNextMonth" class="btn btn-icon">&gt;</button>
                             </div>
                             <div id="monthlyStats" class="stats-grid"></div>
-                        </div>
-                        <!-- Per Habit Stats -->
-                        <div id="perHabitStats" class="subtab-content">
-                            <div class="stats-header">
-                                <h2>Habit Statistics</h2>
-                            </div>
-                            <div id="habitStats" class="habit-stats-list"></div>
                         </div>
                     </div>
                 </div>
@@ -188,6 +243,59 @@
             </div>
             <div class="modal-actions">
                 <button type="button" id="closeGraphModalBtn" class="btn btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- iOS Setup Modal -->
+    <div id="iosSetupModal" class="modal hidden">
+        <div class="modal-content ios-setup-modal-content">
+            <h3>Add to Home Screen</h3>
+            <p class="ios-setup-description">Follow these steps to add DamTrack to your iPhone home screen for a native app experience:</p>
+            <div class="ios-setup-carousel">
+                <div class="carousel-container">
+                    <div class="carousel-slide active">
+                        <img src="../assets/images/1.PNG" alt="Step 1: Tap the Share button">
+                        <div class="carousel-caption">
+                            <span class="step-number">1</span>
+                            <span>Tap the Share button at the bottom of Safari</span>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../assets/images/2.PNG" alt="Step 2: Select Add to Home Screen">
+                        <div class="carousel-caption">
+                            <span class="step-number">2</span>
+                            <span>Scroll down and tap "Add to Home Screen"</span>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../assets/images/3.PNG" alt="Step 3: Tap Add">
+                        <div class="carousel-caption">
+                            <span class="step-number">3</span>
+                            <span>Tap "Add" in the top right corner</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-nav">
+                    <button class="carousel-btn carousel-prev" aria-label="Previous">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <div class="carousel-dots">
+                        <button class="carousel-dot active" data-slide="0"></button>
+                        <button class="carousel-dot" data-slide="1"></button>
+                        <button class="carousel-dot" data-slide="2"></button>
+                    </div>
+                    <button class="carousel-btn carousel-next" aria-label="Next">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" id="closeIosSetupBtn" class="btn btn-secondary">Close</button>
             </div>
         </div>
     </div>

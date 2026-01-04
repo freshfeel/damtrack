@@ -57,6 +57,170 @@ header h1 {
     gap: 12px;
 }
 
+/* Settings Dropdown */
+.settings-dropdown {
+    position: relative;
+}
+
+.settings-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    transition: all 0.2s ease;
+}
+
+.settings-btn:hover {
+    transform: rotate(45deg);
+}
+
+.settings-btn svg {
+    flex-shrink: 0;
+}
+
+.settings-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    min-width: 200px;
+    background: rgba(30, 30, 50, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 8px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.2s ease;
+}
+
+.settings-menu.hidden {
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+}
+
+.settings-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: #e4e4e7;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: left;
+}
+
+.settings-menu-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.settings-menu-item svg {
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.settings-menu-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 8px 0;
+}
+
+.theme-toggle-container {
+    justify-content: space-between;
+    cursor: default;
+}
+
+.theme-toggle-container:hover {
+    background: transparent;
+}
+
+/* Theme Toggle with Sun/Moon */
+.theme-toggle {
+    position: relative;
+    width: 56px;
+    height: 28px;
+    cursor: pointer;
+}
+
+.theme-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.theme-toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7px;
+}
+
+.theme-toggle-slider .sun-icon {
+    color: #fbbf24;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+}
+
+.theme-toggle-slider .moon-icon {
+    color: #a78bfa;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.theme-toggle-slider::before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    right: 3px;
+    bottom: 2px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+    z-index: 1;
+}
+
+.theme-toggle input:checked + .theme-toggle-slider {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+.theme-toggle input:checked + .theme-toggle-slider .sun-icon {
+    opacity: 1;
+}
+
+.theme-toggle input:checked + .theme-toggle-slider .moon-icon {
+    opacity: 0.4;
+}
+
+.theme-toggle input:checked + .theme-toggle-slider::before {
+    transform: translateX(-28px);
+    background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+    box-shadow: 0 2px 8px rgba(251, 191, 36, 0.4);
+}
+
 /* Main Tabs */
 .main-tabs {
     display: flex;
@@ -1665,5 +1829,496 @@ input:checked + .toggle-slider:before {
     .graph-container {
         min-height: 250px;
         padding: 12px;
+    }
+}
+
+/* Light Mode */
+body.light-mode {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+    color: #1e293b;
+}
+
+body.light-mode .container {
+    background: transparent;
+}
+
+body.light-mode header {
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode header h1 {
+    background: linear-gradient(135deg, #1e293b 0%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body.light-mode .main-tabs {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .tab-btn {
+    color: #64748b;
+}
+
+body.light-mode .tab-btn:hover {
+    color: #1e293b;
+    background: rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .tab-btn.active {
+    background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+    color: white;
+}
+
+body.light-mode .btn-secondary {
+    background: rgba(0, 0, 0, 0.04);
+    color: #1e293b;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .btn-secondary:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .btn-icon {
+    background: rgba(0, 0, 0, 0.04);
+    color: #1e293b;
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .btn-icon:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.12);
+}
+
+body.light-mode .habits-panel,
+body.light-mode .calendar-panel,
+body.light-mode .todo-panel,
+body.light-mode .stats-sidebar,
+body.light-mode .stats-content {
+    background: rgba(255, 255, 255, 0.7);
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .panel-header h2,
+body.light-mode .calendar-header h2,
+body.light-mode .todo-header h2,
+body.light-mode .stats-header h2 {
+    color: #1e293b;
+}
+
+body.light-mode .habit-item,
+body.light-mode .todo-item,
+body.light-mode .stat-card,
+body.light-mode .habit-stat-item {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .habit-item:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+body.light-mode .habit-name,
+body.light-mode .todo-item-name,
+body.light-mode .stat-card-name,
+body.light-mode .habit-stat-name,
+body.light-mode .day-habit-name {
+    color: #1e293b;
+}
+
+body.light-mode .habit-info,
+body.light-mode .week-range,
+body.light-mode .stat-card-label,
+body.light-mode .metric-label,
+body.light-mode .habit-stat-frequency,
+body.light-mode .todo-remaining,
+body.light-mode .todo-item-count {
+    color: #64748b;
+}
+
+body.light-mode .drag-handle {
+    color: #94a3b8;
+}
+
+body.light-mode .drag-handle:hover {
+    color: #64748b;
+}
+
+body.light-mode .toggle-slider {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .progress-bar,
+body.light-mode .todo-progress-bar,
+body.light-mode .stat-card-bar {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .calendar-day {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.04);
+}
+
+body.light-mode .calendar-day:hover {
+    background: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .calendar-day.today {
+    background: rgba(139, 92, 246, 0.08);
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+body.light-mode .day-number {
+    color: #1e293b;
+    background: #f1f5f9;
+}
+
+body.light-mode .calendar-day.today .day-number {
+    color: #7c3aed;
+    background: #ede9fe;
+}
+
+body.light-mode .day-header {
+    color: #64748b;
+}
+
+body.light-mode .year-month {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.04);
+}
+
+body.light-mode .year-month-header {
+    color: #64748b;
+}
+
+body.light-mode .year-day-number {
+    color: #64748b;
+}
+
+body.light-mode .year-day.today .year-day-number {
+    color: #7c3aed;
+}
+
+body.light-mode .subtab-btn {
+    color: #64748b;
+}
+
+body.light-mode .subtab-btn:hover {
+    color: #1e293b;
+    background: rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .subtab-btn.active {
+    background: rgba(139, 92, 246, 0.1);
+    color: #7c3aed;
+    border-color: rgba(139, 92, 246, 0.25);
+}
+
+body.light-mode .view-toggle {
+    background: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-mode .view-toggle-btn {
+    color: #64748b;
+}
+
+body.light-mode .view-toggle-btn.active {
+    color: #fff;
+}
+
+body.light-mode .modal-content {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .modal-content h3 {
+    color: #1e293b;
+}
+
+body.light-mode .form-group label {
+    color: #64748b;
+}
+
+body.light-mode .form-group input[type="text"],
+body.light-mode .form-group input[type="number"],
+body.light-mode .form-select,
+body.light-mode .measurement-input {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #1e293b;
+}
+
+body.light-mode .form-group input[type="text"]:focus,
+body.light-mode .form-group input[type="number"]:focus,
+body.light-mode .form-select:focus,
+body.light-mode .measurement-input:focus {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(139, 92, 246, 0.5);
+}
+
+body.light-mode .form-select option {
+    background: #fff;
+    color: #1e293b;
+}
+
+body.light-mode .day-habit-item {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .day-habit-item:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .day-habit-unit {
+    color: #64748b;
+}
+
+body.light-mode .metric-value,
+body.light-mode .stat-card-value {
+    color: #1e293b;
+}
+
+body.light-mode .graph-time-btn {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #64748b;
+}
+
+body.light-mode .graph-time-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+    color: #1e293b;
+}
+
+body.light-mode .graph-time-btn.active {
+    background: rgba(139, 92, 246, 0.15);
+    border-color: rgba(139, 92, 246, 0.4);
+    color: #7c3aed;
+}
+
+body.light-mode .graph-container {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+body.light-mode .settings-menu {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .settings-menu-item {
+    color: #1e293b;
+}
+
+body.light-mode .settings-menu-item:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+body.light-mode .settings-menu-divider {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+body.light-mode ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* iOS Setup Modal */
+.ios-setup-modal-content {
+    max-width: 400px;
+    width: 100%;
+}
+
+.ios-setup-description {
+    font-size: 0.9rem;
+    color: #a1a1aa;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+body.light-mode .ios-setup-description {
+    color: #64748b;
+}
+
+.ios-setup-carousel {
+    margin-bottom: 20px;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+body.light-mode .carousel-container {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.carousel-slide {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+.carousel-slide.active {
+    display: flex;
+}
+
+.carousel-slide img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+.carousel-caption {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    text-align: left;
+    width: 100%;
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+    color: white;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.carousel-caption span:last-child {
+    font-size: 0.9rem;
+    color: #e4e4e7;
+    line-height: 1.4;
+}
+
+body.light-mode .carousel-caption span:last-child {
+    color: #1e293b;
+}
+
+.carousel-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.carousel-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: #e4e4e7;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.carousel-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+}
+
+.carousel-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+body.light-mode .carousel-btn {
+    background: rgba(0, 0, 0, 0.06);
+    color: #64748b;
+}
+
+body.light-mode .carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.12);
+    color: #1e293b;
+}
+
+.carousel-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.carousel-dot:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+.carousel-dot.active {
+    background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+    width: 24px;
+    border-radius: 5px;
+}
+
+body.light-mode .carousel-dot {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+body.light-mode .carousel-dot:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+body.light-mode .carousel-dot.active {
+    background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+}
+
+@media (max-width: 600px) {
+    .ios-setup-modal-content {
+        max-width: calc(100% - 32px);
+    }
+
+    .carousel-slide img {
+        max-height: 300px;
+    }
+
+    .carousel-caption {
+        padding: 12px;
+    }
+
+    .carousel-caption span:last-child {
+        font-size: 0.85rem;
+    }
+
+    .step-number {
+        width: 24px;
+        height: 24px;
+        font-size: 0.75rem;
     }
 }

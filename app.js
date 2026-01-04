@@ -23,6 +23,7 @@ const dayHabitsList = document.getElementById('dayHabitsList');
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     loadFromStorage();
+    loadTheme();
     renderHabits();
     renderCalendar();
     setupEventListeners();
@@ -37,6 +38,18 @@ function setupEventListeners() {
     document.getElementById('exportBtn').addEventListener('click', exportData);
     document.getElementById('importFile').addEventListener('change', importData);
     habitForm.addEventListener('submit', saveHabit);
+
+    // Settings menu toggle
+    document.getElementById('settingsBtn').addEventListener('click', toggleSettingsMenu);
+    document.getElementById('themeToggle').addEventListener('change', toggleTheme);
+
+    // Close settings menu when clicking outside
+    document.addEventListener('click', (e) => {
+        const settingsDropdown = document.querySelector('.settings-dropdown');
+        if (!settingsDropdown.contains(e.target)) {
+            document.querySelector('.settings-menu').classList.add('hidden');
+        }
+    });
 
     // Track type switching
     document.getElementById('trackType').addEventListener('change', handleTrackTypeChange);
@@ -60,6 +73,15 @@ function setupEventListeners() {
     document.getElementById('closeGraphModalBtn').addEventListener('click', () => closeGraphModal());
     document.querySelectorAll('.graph-time-btn').forEach(btn => {
         btn.addEventListener('click', () => changeGraphRange(btn.dataset.range));
+    });
+
+    // iOS Setup modal
+    document.getElementById('iosSetupBtn').addEventListener('click', openIosSetupModal);
+    document.getElementById('closeIosSetupBtn').addEventListener('click', closeIosSetupModal);
+    document.querySelector('.carousel-prev').addEventListener('click', prevSlide);
+    document.querySelector('.carousel-next').addEventListener('click', nextSlide);
+    document.querySelectorAll('.carousel-dot').forEach(dot => {
+        dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.slide)));
     });
 
     // Calendar view toggle
@@ -1298,4 +1320,86 @@ function renderGraph() {
             }
         }
     });
+}
+
+// Settings Menu Functions
+function toggleSettingsMenu(e) {
+    e.stopPropagation();
+    const menu = document.querySelector('.settings-menu');
+    menu.classList.toggle('hidden');
+}
+
+// Theme Functions
+const THEME_KEY = 'damtrackTheme';
+
+function loadTheme() {
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    // Default is dark mode (no class), light mode adds 'light-mode' class
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        document.getElementById('themeToggle').checked = true;
+    }
+}
+
+function toggleTheme() {
+    const isLightMode = document.getElementById('themeToggle').checked;
+
+    if (isLightMode) {
+        document.body.classList.add('light-mode');
+        localStorage.setItem(THEME_KEY, 'light');
+    } else {
+        document.body.classList.remove('light-mode');
+        localStorage.setItem(THEME_KEY, 'dark');
+    }
+}
+
+// iOS Setup Modal Functions
+let currentSlide = 0;
+
+function openIosSetupModal() {
+    currentSlide = 0;
+    updateCarousel();
+    document.getElementById('iosSetupModal').classList.remove('hidden');
+    document.querySelector('.settings-menu').classList.add('hidden');
+}
+
+function closeIosSetupModal() {
+    document.getElementById('iosSetupModal').classList.add('hidden');
+}
+
+function updateCarousel() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+
+    slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+    });
+
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+    });
+
+    // Update prev/next button states
+    document.querySelector('.carousel-prev').disabled = currentSlide === 0;
+    document.querySelector('.carousel-next').disabled = currentSlide === slides.length - 1;
+}
+
+function nextSlide() {
+    const slides = document.querySelectorAll('.carousel-slide');
+    if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        updateCarousel();
+    }
+}
+
+function prevSlide() {
+    if (currentSlide > 0) {
+        currentSlide--;
+        updateCarousel();
+    }
+}
+
+function goToSlide(index) {
+    currentSlide = index;
+    updateCarousel();
 }
