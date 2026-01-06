@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#0f0f1a">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="DamTrack">
+    <link rel="apple-touch-icon" sizes="128x128" href="apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <title>DamTrack</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>DamTrack</h1>
+            <nav class="main-tabs">
+                <button class="tab-btn active" data-tab="calendar">Calendar</button>
+                <button class="tab-btn" data-tab="todo">To Do</button>
+                <button class="tab-btn" data-tab="stats">Stats</button>
+            </nav>
+            <div class="header-actions">
+                <div class="settings-dropdown">
+                    <button id="settingsBtn" class="btn btn-icon settings-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                    </button>
+                    <div class="settings-menu hidden">
+                        <button id="exportBtn" class="settings-menu-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            Export JSON
+                        </button>
+                        <label for="importFile" class="settings-menu-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Import JSON
+                        </label>
+                        <input type="file" id="importFile" accept=".json" hidden>
+                        <div class="settings-menu-divider"></div>
+                        <div class="settings-menu-item theme-toggle-container">
+                            <span>Theme</span>
+                            <label class="theme-toggle">
+                                <input type="checkbox" id="themeToggle">
+                                <span class="theme-toggle-slider">
+                                    <svg class="sun-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                        <circle cx="12" cy="12" r="5"></circle>
+                                        <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                        <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                        <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                        <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"></line>
+                                    </svg>
+                                    <svg class="moon-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                    </svg>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="settings-menu-divider"></div>
+                        <button id="iosSetupBtn" class="settings-menu-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+                                <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                            </svg>
+                            iOS App Setup
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <aside class="habits-panel">
+                <div class="panel-header">
+                    <button id="addHabitBtn" class="btn btn-primary">+ Add Track</button>
+                </div>
+                <ul id="habitsList" class="habits-list"></ul>
+            </aside>
+
+            <!-- Calendar Tab Content -->
+            <section id="calendarTab" class="tab-content active">
+                <div class="calendar-panel">
+                    <div class="calendar-header">
+                        <div class="view-toggle">
+                            <button class="view-toggle-btn active" data-view="month">Month</button>
+                            <button class="view-toggle-btn" data-view="year">Year</button>
+                            <div class="view-toggle-slider"></div>
+                        </div>
+                        <div class="calendar-nav">
+                            <button id="prevMonth" class="btn btn-icon">&lt;</button>
+                            <h2 id="currentMonth"></h2>
+                            <button id="nextMonth" class="btn btn-icon">&gt;</button>
+                        </div>
+                    </div>
+                    <div id="monthView" class="calendar-view">
+                        <div class="calendar-grid">
+                            <div class="day-header">Mon</div>
+                            <div class="day-header">Tue</div>
+                            <div class="day-header">Wed</div>
+                            <div class="day-header">Thu</div>
+                            <div class="day-header">Fri</div>
+                            <div class="day-header">Sat</div>
+                            <div class="day-header">Sun</div>
+                            <div id="calendarDays" class="calendar-days"></div>
+                        </div>
+                    </div>
+                    <div id="yearView" class="calendar-view hidden">
+                        <div id="yearGrid" class="year-grid"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- To Do Tab Content -->
+            <section id="todoTab" class="tab-content">
+                <div class="todo-panel">
+                    <div class="todo-header">
+                        <h2>This Week's Goals</h2>
+                        <span id="weekRange" class="week-range"></span>
+                    </div>
+                    <ul id="todoList" class="todo-list"></ul>
+                </div>
+            </section>
+
+            <!-- Stats Tab Content -->
+            <section id="statsTab" class="tab-content">
+                <div class="stats-container">
+                    <aside class="stats-sidebar">
+                        <button class="subtab-btn active" data-subtab="perHabit">Per Habit</button>
+                        <button class="subtab-btn" data-subtab="perMonth">Per Month</button>
+                    </aside>
+                    <div class="stats-content">
+                        <!-- Per Habit Stats -->
+                        <div id="perHabitStats" class="subtab-content active">
+                            <div class="stats-header">
+                                <h2>Habit Statistics</h2>
+                            </div>
+                            <div id="habitStats" class="habit-stats-list"></div>
+                        </div>
+                        <!-- Per Month Stats -->
+                        <div id="perMonthStats" class="subtab-content">
+                            <div class="stats-header">
+                                <button id="statsPrevMonth" class="btn btn-icon">&lt;</button>
+                                <h2 id="statsMonth"></h2>
+                                <button id="statsNextMonth" class="btn btn-icon">&gt;</button>
+                            </div>
+                            <div id="monthlyStats" class="stats-grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Day Detail Modal -->
+    <div id="dayModal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="dayModalTitle">Tracks for Date</h3>
+            <ul id="dayHabitsList" class="day-habits-list"></ul>
+            <div class="modal-actions">
+                <button type="button" id="closeDayModalBtn" class="btn btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Track Modal -->
+    <div id="habitModal" class="modal hidden">
+        <div class="modal-content">
+            <h3 id="modalTitle">Add New Track</h3>
+            <form id="habitForm">
+                <input type="hidden" id="habitId">
+                <div class="form-group">
+                    <label for="habitName">Track Name</label>
+                    <input type="text" id="habitName" required>
+                </div>
+                <div class="form-group">
+                    <label for="trackType">Track Type</label>
+                    <select id="trackType" class="form-select">
+                        <option value="periodic">Periodic</option>
+                        <option value="measurement">Measurement</option>
+                    </select>
+                </div>
+                <!-- Periodic Options -->
+                <div id="periodicOptions">
+                    <div class="form-group">
+                        <label for="periodicType">Frequency Type</label>
+                        <select id="periodicType" class="form-select">
+                            <option value="everyday">Everyday</option>
+                            <option value="perWeek">X times per week</option>
+                            <option value="perMonth">X times per month</option>
+                            <option value="everyXDays">Every X days</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="frequencyXGroup">
+                        <label for="frequencyX" id="frequencyXLabel">Times per week</label>
+                        <input type="number" id="frequencyX" min="1" value="3">
+                    </div>
+                </div>
+                <!-- Measurement Options -->
+                <div id="measurementOptions" class="hidden">
+                    <div class="form-group">
+                        <label for="measurementUnit">Unit (optional)</label>
+                        <input type="text" id="measurementUnit" placeholder="kg">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="habitColor">Color</label>
+                    <input type="color" id="habitColor" value="#4CAF50">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Measurement Graph Modal -->
+    <div id="graphModal" class="modal hidden">
+        <div class="modal-content graph-modal-content">
+            <h3 id="graphModalTitle">Measurement History</h3>
+            <div class="graph-time-options">
+                <button class="graph-time-btn active" data-range="week">Last Week</button>
+                <button class="graph-time-btn" data-range="month">Last Month</button>
+                <button class="graph-time-btn" data-range="ytd">Year to Date</button>
+                <button class="graph-time-btn" data-range="year">Last Year</button>
+                <button class="graph-time-btn" data-range="all">Since Start</button>
+            </div>
+            <div class="graph-container">
+                <canvas id="measurementChart"></canvas>
+            </div>
+            <div class="modal-actions">
+                <button type="button" id="closeGraphModalBtn" class="btn btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- iOS Setup Modal -->
+    <div id="iosSetupModal" class="modal hidden">
+        <div class="modal-content ios-setup-modal-content">
+            <h3>Add to Home Screen</h3>
+            <p class="ios-setup-description">Follow these steps to add DamTrack to your iPhone home screen for a native app experience:</p>
+            <div class="ios-setup-carousel">
+                <div class="carousel-container">
+                    <div class="carousel-slide active">
+                        <img src="../assets/images/1.PNG" alt="Step 1: Tap the Share button">
+                        <div class="carousel-caption">
+                            <span class="step-number">1</span>
+                            <span>Tap the Share button at the bottom of Safari</span>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../assets/images/2.PNG" alt="Step 2: Select Add to Home Screen">
+                        <div class="carousel-caption">
+                            <span class="step-number">2</span>
+                            <span>Scroll down and tap "Add to Home Screen"</span>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="../assets/images/3.PNG" alt="Step 3: Tap Add">
+                        <div class="carousel-caption">
+                            <span class="step-number">3</span>
+                            <span>Tap "Add" in the top right corner</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-nav">
+                    <button class="carousel-btn carousel-prev" aria-label="Previous">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <div class="carousel-dots">
+                        <button class="carousel-dot active" data-slide="0"></button>
+                        <button class="carousel-dot" data-slide="1"></button>
+                        <button class="carousel-dot" data-slide="2"></button>
+                    </div>
+                    <button class="carousel-btn carousel-next" aria-label="Next">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button type="button" id="closeIosSetupBtn" class="btn btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
